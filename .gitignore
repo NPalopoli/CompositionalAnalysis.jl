@@ -20,6 +20,9 @@ $RECYCLE.BIN/
 # Archivos temporales de Vim
 *~
 
+# Fasta para pruebas
+test*.fasta
+
 # =========================
 # Operating System Files
 # =========================
