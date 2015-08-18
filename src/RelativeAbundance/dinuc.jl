@@ -2,7 +2,9 @@ Pkg.add("FastaIO")
 Pkg.update()
 Pkg.status()
 pwd()
-cd("C:\\Users\\Nico\\Documents\\UFQ-FIL\\CompositionalAnalysis.jl\\src\\RelativeAbundance")
+# Windows / Linux
+# cd("C:\\Users\\Nico\\Documents\\UFQ-FIL\\CompositionalAnalysis.jl\\src\\RelativeAbundance")
+cd("//home//npalopoli//CompositionalAnalysis.jl//src//RelativeAbundance")
 
 using FastaIO
 
@@ -20,15 +22,14 @@ function nucfreqfromfile(file::ASCIIString)
   listnuc = Dict{ASCIIString, Dict{ASCIIString, Float64}}()
   FastaReader(file) do fr
     for (id, seq) in fr
-#      listnuc[id] = nucfreq(seq,2)
-      for i in [1,2]
-        listnuc[id] = nucfreq(seq,i)
-#        listdinuc[id] = push!(get(listdinuc, id, 0),nucfreq(seq,i))
-#        listnuc[id] = nucfreq(seq,i)
+      listnuc[id] = nucfreq(seq,1)
+      for i in [2:4]
+        merge!(listnuc[id],nucfreq(seq,i))
       end
-#      listnuc[id] = map(nucfreq,(seq,(1:2)))
-#      listnuc[id] = map(2) do x; nucfreq(seq,x); end
-#      listnuc[id] = x -> nucfreq(seq,x), [1,2,3,4]
+      for key in collect(keys(listdinuc[id]))
+#        a = haskey(listdinuc[id],key)
+        println(key)
+      end
     end
   end
   listnuc
@@ -36,16 +37,13 @@ end
 
 listdinuc = nucfreqfromfile("test.fasta")
 
+keys(listdinuc)
+collect(keys(listdinuc))
+haskey(listdinuc,collect(keys(listdinuc)))
+keys(collect(keys(listdinuc)))
+haskey(listdinuc[collect(keys(listdinuc))],"AT")
+keys(listdinuc)
 
-map([A, B, C]) do x
-    if x < 0 && iseven(x)
-        return 0
-    elseif x == 0
-        return 1
-    else
-        return x
-    end
-end
 
 
 # fib(n) = n < 2 ? n : fib(n - 1) + fib(n - 2)
