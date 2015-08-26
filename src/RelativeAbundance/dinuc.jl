@@ -2,8 +2,9 @@ Pkg.add("FastaIO")
 Pkg.update()
 Pkg.status()
 pwd()
-# Windows / Linux
+# Windows
 # cd("C:\\Users\\Nico\\Documents\\UFQ-FIL\\CompositionalAnalysis.jl\\src\\RelativeAbundance")
+# Linux
 cd("//home//npalopoli//CompositionalAnalysis.jl//src//RelativeAbundance")
 
 using FastaIO
@@ -28,7 +29,9 @@ function nucfreqfromfile(file::ASCIIString)
       end
       for key in collect(keys(listdinuc[id]))
 #        a = haskey(listdinuc[id],key)
-        println(key)
+        if length(key) == 2
+          println(key)
+        end
       end
     end
   end
@@ -43,7 +46,6 @@ haskey(listdinuc,collect(keys(listdinuc)))
 keys(collect(keys(listdinuc)))
 haskey(listdinuc[collect(keys(listdinuc))],"AT")
 keys(listdinuc)
-
 
 
 # fib(n) = n < 2 ? n : fib(n - 1) + fib(n - 2)
